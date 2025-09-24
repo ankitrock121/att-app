@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - EduTrack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #212529;
+        }
+
+        .header {
+            background: #4361ee;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .student-table th, .student-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .student-table th {
+            background-color: #4361ee;
+            color: white;
+        }
+
+        .student-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .student-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-present {
+            background-color: #4cc9f0;
+            color: white;
+        }
+
+        .status-absent {
+            background-color: #e63946;
+            color: white;
+        }
+
+        .status-late {
+            background-color: #f8961e;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #4361ee;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #3b54d4;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Students Overview</h1>
+    </div>
+    <div class="container">
+        <h2>Class 10-A</h2>
+        <button class="btn btn-primary" id="addStudentBtn" style="margin-bottom: 20px;">Add Student</button>
+
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Attendance</th>
+                    <th>Assignments Completed</th>
+                    <th>Submission Status</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>95%</td>
+                    <td>8/10</td>
+                    <td>On Time</td>
+                    <td><span class="status status-present">Present</span></td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>88%</td>
+                    <td>7/10</td>
+                    <td>Late</td>
+                    <td><span class="status status-late">Late</span></td>
+                </tr>
+                <tr>
+                    <td>Michael Brown</td>
+                    <td>75%</td>
+                    <td>5/10</td>
+                    <td>Missed</td>
+                    <td><span class="status status-absent">Absent</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const addStudentBtn = document.getElementById('addStudentBtn');
+
+        addStudentBtn.addEventListener('click', () => {
+            const studentName = prompt('Enter the student name:');
+            const attendance = prompt('Enter the attendance percentage:');
+            const assignments = prompt('Enter assignments completed (e.g., 5/10):');
+            const submissionStatus = prompt('Enter submission status (e.g., On Time, Late, Missed):');
+            const status = prompt('Enter status (e.g., Present, Absent, Late):');
+
+            if (studentName && attendance && assignments && submissionStatus && status) {
+                const tableBody = document.querySelector('.student-table tbody');
+                const newRow = document.createElement('tr');
+
+                newRow.innerHTML = `
+                    <td>${studentName}</td>
+                    <td>${attendance}%</td>
+                    <td>${assignments}</td>
+                    <td>${submissionStatus}</td>
+                    <td><span class="status status-${status.toLowerCase()}">${status}</span></td>
+                `;
+
+                tableBody.appendChild(newRow);
+            } else {
+                alert('All fields are required to add a new student.');
+            }
+        });
+    </script>
+</body>
+</html>
